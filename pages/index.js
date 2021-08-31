@@ -2,10 +2,10 @@ import Head from "next/head";
 import { MongoClient } from "mongodb";
 
 import MeetupList from "../components/meetups/MeetupList";
-import { Fragment } from "react";
-
+import { Fragment, useState } from "react";
 
 const HomePage = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <Fragment>
       <Head>
@@ -15,7 +15,7 @@ const HomePage = (props) => {
           content="Browse a huge list of active React meetups!"
         ></meta>
       </Head>
-      <MeetupList meetups={props.meetups} />
+      <MeetupList meetups={props.meetups} isLoading={isLoading} />
     </Fragment>
   );
 };

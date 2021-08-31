@@ -119,10 +119,44 @@ module.exports = {
 
 /***/ }),
 
+/***/ "BVmH":
+/***/ (function(module, exports) {
+
+// Exports
+module.exports = {
+	"spinner": "Spinner_spinner__2do7W"
+};
+
+
+/***/ }),
+
 /***/ "F5FC":
 /***/ (function(module, exports) {
 
 module.exports = require("react/jsx-runtime");
+
+/***/ }),
+
+/***/ "N1IL":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("F5FC");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("BVmH");
+/* harmony import */ var _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Spinner_module_css__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+const Spinner = () => {
+  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsxs"])("div", {
+    className: _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.spinner,
+    children: [/*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {}), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {}), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {}), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {})]
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Spinner);
 
 /***/ }),
 
@@ -145,6 +179,9 @@ var head_default = /*#__PURE__*/__webpack_require__.n(head_);
 
 // EXTERNAL MODULE: external "mongodb"
 var external_mongodb_ = __webpack_require__("ykE2");
+
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__("cDcd");
 
 // EXTERNAL MODULE: external "next/router"
 var router_ = __webpack_require__("4Q3z");
@@ -198,6 +235,9 @@ function MeetupItem(props) {
 }
 
 /* harmony default export */ var meetups_MeetupItem = (MeetupItem);
+// EXTERNAL MODULE: ./components/ui/Spinner.js
+var Spinner = __webpack_require__("N1IL");
+
 // EXTERNAL MODULE: ./components/meetups/MeetupList.module.css
 var MeetupList_module = __webpack_require__("A3pG");
 var MeetupList_module_default = /*#__PURE__*/__webpack_require__.n(MeetupList_module);
@@ -207,22 +247,24 @@ var MeetupList_module_default = /*#__PURE__*/__webpack_require__.n(MeetupList_mo
 
 
 
+
+
+
 function MeetupList(props) {
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])("ul", {
-    className: MeetupList_module_default.a.list,
-    children: props.meetups.map(meetup => /*#__PURE__*/Object(jsx_runtime_["jsx"])(meetups_MeetupItem, {
-      id: meetup.id,
-      image: meetup.image,
-      title: meetup.title,
-      address: meetup.address
-    }, meetup.id))
+  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(external_react_["Fragment"], {
+    children: [props.isLoading && /*#__PURE__*/Object(jsx_runtime_["jsx"])(Spinner["a" /* default */], {}), /*#__PURE__*/Object(jsx_runtime_["jsx"])("ul", {
+      className: MeetupList_module_default.a.list,
+      children: props.meetups.map(meetup => /*#__PURE__*/Object(jsx_runtime_["jsx"])(meetups_MeetupItem, {
+        id: meetup.id,
+        image: meetup.image,
+        title: meetup.title,
+        address: meetup.address
+      }, meetup.id))
+    })]
   });
 }
 
 /* harmony default export */ var meetups_MeetupList = (MeetupList);
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__("cDcd");
-
 // CONCATENATED MODULE: ./pages/index.js
 
 
@@ -232,6 +274,10 @@ var external_react_ = __webpack_require__("cDcd");
 
 
 const HomePage = props => {
+  const {
+    0: isLoading,
+    1: setIsLoading
+  } = Object(external_react_["useState"])(false);
   return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(external_react_["Fragment"], {
     children: [/*#__PURE__*/Object(jsx_runtime_["jsxs"])(head_default.a, {
       children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("title", {
@@ -241,7 +287,8 @@ const HomePage = props => {
         content: "Browse a huge list of active React meetups!"
       })]
     }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(meetups_MeetupList, {
-      meetups: props.meetups
+      meetups: props.meetups,
+      isLoading: isLoading
     })]
   });
 }; // export async function getServerSideProps(context) {

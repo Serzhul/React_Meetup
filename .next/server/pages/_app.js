@@ -187,6 +187,10 @@ __webpack_require__.r(__webpack_exports__);
 // EXTERNAL MODULE: external "react/jsx-runtime"
 var jsx_runtime_ = __webpack_require__("F5FC");
 
+// EXTERNAL MODULE: external "next/router"
+var router_ = __webpack_require__("4Q3z");
+var router_default = /*#__PURE__*/__webpack_require__.n(router_);
+
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__("YFqc");
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
@@ -195,36 +199,94 @@ var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 var MainNavigation_module = __webpack_require__("cNlf");
 var MainNavigation_module_default = /*#__PURE__*/__webpack_require__.n(MainNavigation_module);
 
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__("cDcd");
+
+// EXTERNAL MODULE: ./components/layout/Popup.module.css
+var Popup_module = __webpack_require__("ak7Q");
+var Popup_module_default = /*#__PURE__*/__webpack_require__.n(Popup_module);
+
+// CONCATENATED MODULE: ./components/layout/Popup.js
+
+
+
+
+
+
+const Popup = () => {
+  let router = Object(router_["useRouter"])();
+
+  const hidePopup = () => {
+    router.push("/");
+  };
+
+  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(external_react_["Fragment"], {
+    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
+      className: Popup_module_default.a.layout,
+      onClick: hidePopup
+    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
+      className: Popup_module_default.a.popup,
+      children: router.query.message
+    })]
+  });
+};
+
+/* harmony default export */ var layout_Popup = (Popup);
+// EXTERNAL MODULE: ./components/ui/Spinner.js
+var Spinner = __webpack_require__("N1IL");
+
 // CONCATENATED MODULE: ./components/layout/MainNavigation.js
 
 
 
 
 
-function MainNavigation() {
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])("header", {
-    className: MainNavigation_module_default.a.header,
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-      className: MainNavigation_module_default.a.logo,
-      children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-        href: "/",
-        children: " React Meetups"
-      })
-    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("nav", {
-      children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])("ul", {
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("li", {
-          children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-            href: "/",
-            children: "All Meetups"
-          })
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("li", {
-          children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
-            href: "/new-meetup",
-            children: "Add New Meetup"
-          })
-        })]
-      })
-    })]
+
+
+
+
+function MainNavigation(props) {
+  const router = Object(router_["useRouter"])();
+  const {
+    0: isVisible,
+    1: setIsVisible
+  } = Object(external_react_["useState"])(false);
+  const {
+    0: isLoading,
+    1: setIsLoading
+  } = Object(external_react_["useState"])(false);
+  Object(external_react_["useEffect"])(() => {
+    if (router.query.isVisible !== undefined) {
+      setIsVisible(router.query.isVisible);
+    } else {
+      setIsVisible(false);
+    }
+  }, [router.query.isVisible]);
+  return /*#__PURE__*/Object(jsx_runtime_["jsx"])(external_react_["Fragment"], {
+    children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])("header", {
+      className: MainNavigation_module_default.a.header,
+      children: [isVisible && /*#__PURE__*/Object(jsx_runtime_["jsx"])(layout_Popup, {}), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
+        className: MainNavigation_module_default.a.logo,
+        children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
+          href: "/",
+          children: " React Meetups"
+        })
+      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("nav", {
+        children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])("ul", {
+          children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("li", {
+            children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
+              href: "/",
+              children: "All Meetups"
+            })
+          }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("li", {
+            children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(link_default.a, {
+              href: "/new-meetup",
+              children: "Add New Meetup"
+            })
+          })]
+        })
+      })]
+    })
   });
 }
 
@@ -255,6 +317,7 @@ var globals = __webpack_require__("zPlV");
 // CONCATENATED MODULE: ./pages/_app.js
 
 
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -264,12 +327,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
 function MyApp({
   Component,
   pageProps
 }) {
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])(layout_Layout, {
-    children: /*#__PURE__*/Object(jsx_runtime_["jsx"])(Component, _objectSpread({}, pageProps))
+  const {
+    0: isLoading,
+    1: setIsLoading
+  } = Object(external_react_["useState"])(false);
+
+  function routeChangeStart() {
+    router_default.a.events.on("routeChangeStart", () => {
+      setIsLoading(true);
+    });
+  }
+
+  function routeChangeComplete() {
+    router_default.a.events.on("routeChangeComplete", () => {
+      setIsLoading(false);
+    });
+  }
+
+  Object(external_react_["useEffect"])(() => {
+    routeChangeStart();
+    routeChangeComplete();
+  }, []);
+  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(layout_Layout, {
+    children: [isLoading && /*#__PURE__*/Object(jsx_runtime_["jsx"])(Spinner["a" /* default */], {}), /*#__PURE__*/Object(jsx_runtime_["jsx"])(Component, _objectSpread({}, pageProps))]
   });
 }
 
@@ -425,6 +512,13 @@ function normalizeLocalePath(pathname, locales) {
 
 /***/ }),
 
+/***/ "4Q3z":
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
+
+/***/ }),
+
 /***/ "6D7l":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -556,6 +650,17 @@ function formatUrl(urlObj) {
 
 /***/ }),
 
+/***/ "BVmH":
+/***/ (function(module, exports) {
+
+// Exports
+module.exports = {
+	"spinner": "Spinner_spinner__2do7W"
+};
+
+
+/***/ }),
+
 /***/ "F5FC":
 /***/ (function(module, exports) {
 
@@ -590,6 +695,29 @@ function getAssetPathFromRoute(route, ext = '') {
   const path = route === '/' ? '/index' : /^\/index(\/|$)/.test(route) ? `/index${route}` : `${route}`;
   return path + ext;
 }
+
+/***/ }),
+
+/***/ "N1IL":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("F5FC");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("BVmH");
+/* harmony import */ var _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Spinner_module_css__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+const Spinner = () => {
+  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsxs"])("div", {
+    className: _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.spinner,
+    children: [/*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {}), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {}), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {}), /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {})]
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Spinner);
 
 /***/ }),
 
@@ -1023,6 +1151,19 @@ function getRouteRegex(normalizedRoute) {
     groups
   };
 }
+
+/***/ }),
+
+/***/ "ak7Q":
+/***/ (function(module, exports) {
+
+// Exports
+module.exports = {
+	"layout": "Popup_layout__1aGTu",
+	"popup": "Popup_popup__3rmSd",
+	"openPopUp": "Popup_openPopUp__5hXYB"
+};
+
 
 /***/ }),
 

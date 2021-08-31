@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap");
+
+.layout {
+  position: absolute;
+  z-index: 1010;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.popup {
+  height: 150px;
+  width: 400px;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+  padding: 45px;
+  display: block;
+  z-index: 1011;
+  border-radius: 10px;
+  font-family: "Open Sans", "Lato", sans-serif;
+  font-size: 26px;
+  text-align: center;
+  animation: openPopUp 0.2s ease-out;
+}
+
+@keyframes openPopUp {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: 5%;
+  }
+
+  100% {
+    top: 10%;
+  }
+}
